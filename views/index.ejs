@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= title %></title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script defer src="../script.js"></script>
+  </head>
+  <body>
+
+    <!-- Navbar -->
+    <nav class="navbar bg-primary">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#" style="color: white;">Mini MessageBoard</a>
+        </div>
+      </div>
+    </nav>
+
+    <h1 class="text-center mt-5">
+      Mini Message Board using Express/MongoDB
+    </h1>
+
+    <!--Add Message Section-->
+    <div class="container d-flex justify-content-center align-items-center" style="margin-top: 2rem;">
+      <h4  style="margin-right: 1rem;">Click Add to Send a new message on the board!</h4>
+            <!-- Button trigger modal -->
+      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+        Add
+      </button>
+
+        <!-- Modal -->
+        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Add a Message</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+
+                <!--FORM-->
+                <form method="POST" action="/new">
+                  <div class="mb-3">
+                    <label for="username" class="form-label">Enter your Name!</label>
+                    <input type="text" class="form-control" id="username" placeholder="Jake Cyrus" required name="username">
+                  </div>
+                  <div class="mb-3">
+                    <label for="messageText" class="form-label">Write a Message!</label>
+                    <textarea  class="form-control" id="messageText" cols="30" rows="5" required name="messageText"></textarea>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">ADD</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+    <!-- Card Div-->
+
+    <div class="container mt-5">
+      <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5">
+        <% if(messages.length > 0){%> <% messages.forEach(message => { %>
+        <div class="col mb-3">
+          <div class="card mb-3" style="max-width: 500px; min-height: 300px;">
+            <div class="row g-0">
+              <div class="col-md-4">
+                <img src="images/profile placeholder.jpg" class="img-fluid rounded-start" alt="...">
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+
+                  <h5 class="card-title"><%= message.user %></h5>
+                  <p class="card-text"><%= message.text %> </p>
+                  <p class="card-text"><small class="text-muted"><%= message.added %></small></p>
+                
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <% }) %> <%} %>
+      </div>
+    </div>
+
+    <footer class="bg-primary text-center text-white footer">
+      <!-- Grid container -->
+      <div class="container p-4 pb-0">
+        <!-- Section: Social media -->
+        <section class="mb-4">
+          <!-- Facebook -->
+          <a
+            class="btn text-white btn-floating m-1"
+            style="background-color: #3b5998;"
+            href="https://www.facebook.com/SilentXenon7/"
+            role="button"
+            target="_blank"
+            ><i class="fab fa-facebook-f"></i
+            
+          ></a>
+    
+          <!-- Github -->
+          <a
+            class="btn text-white btn-floating m-1"
+            style="background-color: #333333;"
+            href="https://github.com/hyxenon"
+            role="button"
+            target="_blank"
+            ><i class="fab fa-github"></i
+          ></a>
+        </section>
+        <!-- Section: Social media -->
+      </div>
+      <!-- Grid container -->
+    
+      <!-- Copyright -->
+      <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+        © 2023 Copyright:
+        <a class="text-white text-decoration-none" href="">Justine Edward P. Santos</a>
+      </div>
+      <!-- Copyright -->
+    </footer>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
